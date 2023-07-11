@@ -1,0 +1,12 @@
+			< MERHABA />	
+GaripText'i kullanabilmek için:
+1- GaripText adlı klasörü Visual Studio Code içerisinde açın.
+2- VSCode terminaline "nodemon server.js" yazarak server'i başlatın.
+3- Tarayıcınızı açın ve "http://localhost:5000" adresine gidin.
+4- Göndermek istediğiniz maili girin.
+5- En fazla 8 karakter olacak şekilde sadece harflerden oluşan ve boşluk bulundurmayan bir anahtar kelime girin.
+6- Sağ taraftaki boşluklara gerekli mail bilgilerini girin.
+7- Gönder'e tıkladığınızda mailiniz şifrelenmiş bir şekilde gönderilecektir.
+8- Şifreli mesajı çözmek için ise "Şifreli Metni Çöz" butonuna tıklayın.
+9- Şifreli mesajı ve anahtar kelimeyi girip, "Şifreyi Çöz" butonuna tıklayın.
+			< TEŞEKKÜRLER />
