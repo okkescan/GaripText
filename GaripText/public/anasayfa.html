@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/css/anasayfa.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway:900&display=swap"
+    />
+    <title>GaripText</title>
+    <!-- NAVBAR -->
+    <div class="fanalys">
+      <nav>
+        <div class="baskisim">
+          <div class="anibaslik">
+            <div id="container">
+              <span id="text1"></span>
+              <span id="text2"></span>
+            </div>
+
+            <svg id="filters">
+              <defs>
+                <filter id="threshold">
+                  <feColorMatrix
+                    in="SourceGraphic"
+                    type="matrix"
+                    values="1 0 0 0 0
+                          0 1 0 0 0
+                          0 0 1 0 0
+                          0 0 0 255 -140"
+                  />
+                </filter>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </nav>
+
+      <div class="normalMesaj">
+        <h3>Mesajınızı Giriniz</h3>
+        <input
+          id="nmesajj"
+          type="text"
+          class="nmesaj"
+          placeholder="Mesajınızı Girin"
+        />
+      </div>
+      <div class="anahtar">
+        <h3>Anahtar Kelime</h3>
+        <input
+          class="anahtark"
+          type="text"
+          name=""
+          id="shiftInput"
+          placeholder="Lütfen harflerden oluşan en fazla 8 karakter girin!"
+        />
+      </div>
+      <div class="container">
+        <button
+          type="button"
+          class="donusturbtn"
+          id="encrypt-btn"
+          style="--color: #f6f6c9"
+        >
+          <span>Dönüştür</span><i></i>
+        </button>
+      </div>
+
+      <div class="sifreliMesaj">
+        <h3>Şifreli Mesajınız</h3>
+        <label class="smesaj">
+          <textarea id="smesajj" type="text" name="message"></textarea>
+        </label>
+      </div>
+      <input
+        type="email"
+        class="gonderenmail"
+        id="gonderenmail"
+        placeholder="Kendi mail adresinizi giriniz:"
+      />
+      <input
+        type="password"
+        class="gonderenmailsifre"
+        id="gonderenmailsifre"
+        placeholder="Şifrenizi giriniz:"
+      />
+      <input
+        type="email"
+        class="alicimail"
+        id="alicimail"
+        placeholder="Alıcının mail adresini giriniz:"
+      />
+      <div class="containeruc">
+        <button
+          type="button"
+          class="gonderbtn"
+          id="gonderbtn"
+          style="--color: #fd841f"
+        >
+          <span>Gönder</span><i></i>
+        </button>
+      </div>
+
+      <div class="containeriki">
+        <a class="metnicoz" href="metnicoz.html" style="--color: #b2b2b2">
+          <span>Şifreli Metni Çöz</span><i></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="sol">
+        <h2>GaripText</h2>
+
+        <p>Tüm Hakları Saklıdır ©</p>
+      </div>
+      <div class="sag">
+        <br />
+        <div class="icons">
+          <ul>
+            <a href="https://github.com/okkescan" class="okkesgithub"
+              ><i class="fa-brands fa-github"></i>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </head>
+
+  <body>
+    <script src="/js/app.js"></script>
+    <script src="./index.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("vdjtKJfCZIfyflgil");
+      })();
+    </script>
+    <script>
+      let encryptbtn = document.getElementById("encrypt-btn");
+      let eInput = document.getElementById("smesajj");
+      let pInput = document.getElementById("nmesajj");
+      let inputs = [eInput, pInput];
+
+      let gond = document.getElementById("gonderenmail");
+
+      inputs.forEach((input) => {
+        input.oninput = () => {
+          input.value = input.value.toUpperCase(); //HEPSİNİ BÜYÜK HARFE DÖNÜŞTÜRÜR.
+        };
+      });
+
+      function encrypt() {
+        let pInput = document.getElementById("nmesajj").value;
+        let solved = "";
+        let shiftInput = document.getElementById("shiftInput").value;
+
+        const myArray = pInput.split("");
+        var myyaray = [];
+        for (var i = 0; i < myArray.length; i++) {
+          myyaray[i] = myArray[i];
+        }
+        var harfler = [
+          "A",
+          "B",
+          "C",
+          "Ç",
+          "D",
+          "E",
+          "F",
+          "G",
+          "Ğ",
+          "H",
+          "I",
+          "İ",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "Ö",
+          "P",
+          "R",
+          "S",
+          "Ş",
+          "T",
+          "U",
+          "Ü",
+          "V",
+          "Y",
+          "Z",
+          " ",
+          ".",
+        ];
+        var karsiligi = [
+          "191",
+          "192",
+          "193",
+          "189",
+          "187",
+          "185",
+          "195",
+          "197",
+          "199",
+          "183",
+          "181",
+          "179",
+          "201",
+          "203",
+          "205",
+          "177",
+          "175",
+          "173",
+          "207",
+          "209",
+          "211",
+          "171",
+          "169",
+          "167",
+          "213",
+          "215",
+          "217",
+          "165",
+          "163",
+          "123",
+          "100",
+        ];
+        var karsiligi2 = [
+          "100",
+          "195",
+          "192",
+          "911",
+          "187",
+          "185",
+          "191",
+          "197",
+          "199",
+          "183",
+          "181",
+          "179",
+          "201",
+          "203",
+          "205",
+          "177",
+          "175",
+          "173",
+          "207",
+          "209",
+          "211",
+          "171",
+          "169",
+          "167",
+          "213",
+          "215",
+          "217",
+          "165",
+          "163",
+          "135",
+          "100",
+        ];
+        var karsiligi3 = [
+          "857",
+          "859",
+          "855",
+          "789",
+          "787",
+          "785",
+          "925",
+          "927",
+          "923",
+          "183",
+          "185",
+          "189",
+          "278",
+          "280",
+          "281",
+          "345",
+          "347",
+          "343",
+          "265",
+          "267",
+          "263",
+          "477",
+          "479",
+          "475",
+          "663",
+          "661",
+          "665",
+          "168",
+          "169",
+          "333",
+          "100",
+        ];
+        var karsiligi4 = [
+          "653",
+          "356",
+          "197",
+          "208",
+          "188",
+          "178",
+          "811",
+          "333",
+          "111",
+          "589",
+          "778",
+          "785",
+          "899",
+          "895",
+          "991",
+          "990",
+          "999",
+          "105",
+          "103",
+          "101",
+          "211",
+          "213",
+          "454",
+          "234",
+          "988",
+          "568",
+          "312",
+          "665",
+          "100",
+          "888",
+          "100",
+        ];
+        var sifreliarray = [];
+
+        if (shiftInput.length > 3 && shiftInput.length <= 5) {
+          for (var j = 0; j < myyaray.length; j++) {
+            for (var i = 0; i < harfler.length; i++) {
+              if (myyaray[j] == harfler[i]) {
+                sifreliarray[j] = karsiligi[i];
+              }
+            }
+          }
+        } else if (shiftInput.length > 0 && shiftInput.length <= 3) {
+          for (var j = 0; j < myyaray.length; j++) {
+            for (var i = 0; i < harfler.length; i++) {
+              if (myyaray[j] == harfler[i]) {
+                sifreliarray[j] = karsiligi4[i];
+              }
+            }
+          }
+        } else if (shiftInput.length > 5 && shiftInput.length <= 7) {
+          for (var j = 0; j < myyaray.length; j++) {
+            for (var i = 0; i < harfler.length; i++) {
+              if (myyaray[j] == harfler[i]) {
+                sifreliarray[j] = karsiligi2[i];
+              }
+            }
+          }
+        } else {
+          for (var j = 0; j < myyaray.length; j++) {
+            for (var i = 0; i < harfler.length; i++) {
+              if (myyaray[j] == harfler[i]) {
+                sifreliarray[j] = karsiligi3[i];
+              }
+            }
+          }
+        }
+
+        var dizi = [];
+        function randomInt(min, max) {
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        var x = 0;
+        for (var i = 0; i < sifreliarray.length * 2; i++) {
+          var randomsayi = randomInt(10, 99);
+          if (i % 2 == 0) {
+            dizi[i] = randomsayi;
+          } else {
+            dizi[i] = sifreliarray[x];
+            x++;
+          }
+        }
+
+        var deneme = "";
+        for (var i = 0; i < dizi.length; i++) {
+          var deneme = deneme + dizi[i];
+        }
+
+        eInput.value = deneme;
+      }
+      encryptbtn.addEventListener("click", encrypt);
+
+      // var gondbtn = document.getElementById("gonderbtn");
+      // gondbtn.addEventListener("click", function (e) {
+      //   e.preventDefault();
+
+      //   let icerik = document.getElementById("smesajj").value;
+      //   let gondMail = document.getElementById("gonderenmail").value;
+      //   let gondMailSifre = document.getElementById("gonderenmailsifre").value;
+      //   let aliciMail = document.getElementById("alicimail").value;
+      //   let message = "Mail Gönderilmiştir!";
+      //   Email.send({
+      //     SecureToken: "c2a40048-4389-490a-869b-738e086a0f3b",
+      //     Host: "smtp.elasticemail.com",
+      //     Username: gondMail,
+      //     Password: gondMailSifre,
+      //     To: aliciMail,
+      //     From: gondMail,
+      //     Subject: "...",
+      //     Body: icerik,
+      //   }).then((message) => alert(message));
+      // });
+
+      // animasyonlu başlık
+      const elts = {
+        text1: document.getElementById("text1"),
+        text2: document.getElementById("text2"),
+      };
+
+      const texts = ["103097114105112", "116101120116", "gar!ptext"];
+
+      const morphTime = 1;
+      const cooldownTime = 0.25;
+
+      let textIndex = texts.length - 1;
+      let time = new Date();
+      let morph = 0;
+      let cooldown = cooldownTime;
+
+      elts.text1.textContent = texts[textIndex % texts.length];
+      elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+
+      function doMorph() {
+        morph -= cooldown;
+        cooldown = 0;
+
+        let fraction = morph / morphTime;
+
+        if (fraction > 1) {
+          cooldown = cooldownTime;
+          fraction = 1;
+        }
+
+        setMorph(fraction);
+      }
+
+      function setMorph(fraction) {
+        elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+        elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+        fraction = 1 - fraction;
+        elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+        elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+        elts.text1.textContent = texts[textIndex % texts.length];
+        elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+      }
+
+      function doCooldown() {
+        morph = 0;
+
+        elts.text2.style.filter = "";
+        elts.text2.style.opacity = "100%";
+
+        elts.text1.style.filter = "";
+        elts.text1.style.opacity = "0%";
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        let newTime = new Date();
+        let shouldIncrementIndex = cooldown > 0;
+        let dt = (newTime - time) / 5000;
+        time = newTime;
+
+        cooldown -= dt;
+
+        if (cooldown <= 0) {
+          if (shouldIncrementIndex) {
+            textIndex++;
+          }
+
+          doMorph();
+        } else {
+          doCooldown();
+        }
+      }
+
+      animate();
+    </script>
+  </body>
+</html>

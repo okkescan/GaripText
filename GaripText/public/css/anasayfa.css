@@ -1,0 +1,553 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.fanalys {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+      rgba(204, 204, 204, 0.144),
+      rgba(174, 173, 173, 0.06)
+    ),
+    url(bg3.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding-left: 15%;
+  padding-right: 10%;
+}
+.baskisim {
+  display: flex;
+  flex-direction: row;
+}
+.baslik {
+  position: relative;
+  margin: 0;
+  font-size: 4em;
+  font-weight: 500;
+  color: rgb(59, 59, 59);
+  z-index: 1;
+  overflow: hidden;
+  font-family: "Rubik Glitch", cursive;
+}
+.fanalys .normalMesaj h3 {
+  position: absolute;
+  top: 25%;
+  left: 7%;
+  color: white;
+  font-size: 25px;
+  font-family: "Caveat", cursive;
+}
+.fanalys .normalMesaj .nmesaj {
+  display: inline;
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  width: 500px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.993);
+}
+.fanalys .normalMesaj .nmesaj:focus {
+  border: 5px solid rgb(12, 142, 142);
+  background-color: #fff;
+}
+
+.fanalys .anahtar h3 {
+  position: absolute;
+  top: 42%;
+  left: 7%;
+  color: white;
+  font-size: 25px;
+  font-family: "Caveat", cursive;
+  text-shadow: 10px black;
+}
+
+.fanalys .anahtar .anahtark {
+  display: inline;
+  position: absolute;
+  top: 48%;
+  left: 5%;
+  width: 500px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+.fanalys .anahtar .anahtark:focus {
+  background-color: #fff;
+}
+/* .fanalys .metnicoz {
+  position: absolute;
+  top: 90%;
+  left: 15%;
+  font-size: 35px;
+  border: 2px solid white;
+  border-radius: 10%;
+  background-color: rgba(112, 44, 14, 255);
+  font-family: "Caveat", cursive;
+  text-decoration: none;
+  color: #fff;
+}
+.fanalys .metnicoz:hover {
+  background-color: black;
+  color: white;
+}
+.fanalys .metnicoz:active {
+  border: 3px solid black;
+  background-color: palegoldenrod;
+  color: black;
+} */
+
+.containeriki {
+  width: 100%;
+  display: flex;
+  position: absolute;
+  top: 90%;
+  left: 12%;
+}
+
+.metnicoz {
+  position: relative;
+  background: #fff;
+  color: black;
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  padding: 0.75rem 1.5rem;
+  transition: 0.5s;
+}
+
+.metnicoz:hover {
+  letter-spacing: 0.25rem;
+  background: var(--color);
+  color: black;
+  box-shadow: 0 0 50px 10px var(--color);
+}
+
+.metnicoz::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #fff;
+}
+.metnicoz:hover {
+  background: black;
+}
+
+.metnicoz span {
+  position: relative;
+  z-index: 1;
+}
+
+.metnicoz i {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.metnicoz i::before {
+  content: "";
+  position: absolute;
+  top: -3.5px;
+  left: 80%;
+  width: 10px;
+  height: 5px;
+  border: 2px solid var(--color);
+  background: #27282c;
+  transform: translateX(-50%);
+  transition: 0.5s;
+}
+
+.metnicoz:hover i::before {
+  left: 20%;
+  width: 20px;
+}
+
+.metnicoz i::after {
+  content: "";
+  position: absolute;
+  bottom: -3.5px;
+  left: 20%;
+  width: 10px;
+  height: 5px;
+  border: 2px solid var(--color);
+  background: #27282c;
+  transform: translateX(-50%);
+  transition: 0.5s;
+}
+
+.metnicoz:hover i::after {
+  left: 80%;
+  width: 20px;
+}
+
+/* .fanalys .donusturbtn {
+  position: absolute;
+  top: 60%;
+  left: 17%;
+  font-size: 35px;
+  border: 3px solid white;
+  color: #fff;
+  border-radius: 10%;
+  background-color: rgba(112, 44, 14, 255);
+  font-family: "Caveat", cursive;
+}
+.fanalys .donusturbtn:hover {
+  border: 3px solid #fff;
+  color: #fff;
+  background-color: black;
+}
+
+.fanalys .donusturbtn:active {
+  border: 3px solid black;
+  background-color: palegoldenrod;
+  color: black;
+} */
+
+.container {
+  width: 100%;
+  display: flex;
+  position: absolute;
+  top: 60%;
+  left: 15%;
+}
+
+.donusturbtn {
+  position: relative;
+  background: #444;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  padding: 0.75rem 1.5rem;
+  transition: 0.5s;
+}
+
+.donusturbtn:hover {
+  letter-spacing: 0.25rem;
+  background: var(--color);
+  color: var(--color);
+  box-shadow: 0 0 50px 10px var(--color);
+}
+
+.donusturbtn::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #27282c;
+}
+
+.donusturbtn span {
+  position: relative;
+  z-index: 1;
+}
+
+.donusturbtn i {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.donusturbtn i::before {
+  content: "";
+  position: absolute;
+  top: -3.5px;
+  left: 80%;
+  width: 10px;
+  height: 5px;
+  border: 2px solid var(--color);
+  background: #27282c;
+  transform: translateX(-50%);
+  transition: 0.5s;
+}
+
+.donusturbtn:hover i::before {
+  left: 20%;
+  width: 20px;
+}
+
+.donusturbtn i::after {
+  content: "";
+  position: absolute;
+  bottom: -3.5px;
+  left: 20%;
+  width: 10px;
+  height: 5px;
+  border: 2px solid var(--color);
+  background: #27282c;
+  transform: translateX(-50%);
+  transition: 0.5s;
+}
+
+.donusturbtn:hover i::after {
+  left: 80%;
+  width: 20px;
+}
+
+.fanalys .sifreliMesaj h3 {
+  position: absolute;
+  top: 68%;
+  left: 7%;
+  color: white;
+  font-size: 25px;
+  font-family: "Caveat", cursive;
+  text-shadow: 10px black;
+}
+
+.fanalys .sifreliMesaj #smesajj {
+  display: inline;
+  position: absolute;
+  top: 72%;
+  left: 5%;
+  width: 500px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+.fanalys .sifreliMesaj #smesajj:focus {
+  border: 5px solid rgb(12, 142, 142);
+  background-color: #fff;
+}
+
+.fanalys .gonderenmail {
+  position: absolute;
+  top: 40%;
+  left: 72%;
+  font-size: 20px;
+  height: 50px;
+  border: 3px solid black;
+  border-radius: 50px;
+  background-color: rgb(255, 255, 255);
+}
+.fanalys .gonderenmailsifre {
+  position: absolute;
+  top: 50%;
+  left: 72%;
+  font-size: 20px;
+  height: 50px;
+  border: 3px solid black;
+  border-radius: 50px;
+  background-color: rgb(255, 255, 255);
+}
+.fanalys .alicimail {
+  position: absolute;
+  top: 60%;
+  left: 72%;
+  font-size: 20px;
+  height: 50px;
+  border: 3px solid black;
+  border-radius: 50px;
+  background-color: rgb(255, 255, 255);
+}
+/* .fanalys .gonderbtn {
+  position: absolute;
+  top: 70%;
+  left: 78%;
+  font-size: 35px;
+  border: 3px solid palegoldenrod;
+  border-radius: 10%;
+  background-color: rgb(255, 255, 255);
+  font-family: "Caveat", cursive;
+}
+
+.fanalys .gonderbtn:active {
+  border: 3px solid black;
+  background-color: palegoldenrod;
+} */
+.containeruc {
+  width: 100%;
+  display: flex;
+  position: absolute;
+  top: 70%;
+  left: 75.5%;
+}
+
+.gonderbtn {
+  position: relative;
+  background: #fff;
+  color: black;
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  padding: 0.75rem 1.5rem;
+  transition: 0.5s;
+}
+
+.gonderbtn:hover {
+  letter-spacing: 0.25rem;
+  background: var(--color);
+  color: black;
+  box-shadow: 0 0 50px 10px var(--color);
+}
+
+.gonderbtn::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #fff;
+}
+.gonderbtn:hover {
+  background: black;
+}
+
+.gonderbtn span {
+  position: relative;
+  z-index: 1;
+}
+
+.gonderbtn i {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.gonderbtn i::before {
+  content: "";
+  position: absolute;
+  top: -3.5px;
+  left: 80%;
+  width: 10px;
+  height: 5px;
+  border: 2px solid var(--color);
+  border-radius: 10px;
+  background: #27282c;
+  transform: translateX(-50%);
+  transition: 0.5s;
+}
+
+.gonderbtn:hover i::before {
+  left: 20%;
+  width: 20px;
+}
+
+.gonderbtn i::after {
+  content: "";
+  position: absolute;
+  bottom: -3.5px;
+  left: 20%;
+  width: 10px;
+  height: 5px;
+  border: 2px solid var(--color);
+  border-radius: 10px;
+  background: #27282c;
+  transform: translateX(-50%);
+  transition: 0.5s;
+}
+
+.gonderbtn:hover i::after {
+  left: 80%;
+  width: 20px;
+}
+
+/* navbar */
+.baslik span {
+}
+.baslik:hover {
+  color: rgb(255, 150, 14);
+}
+.baslikspan {
+  color: rgb(255, 154, 14);
+}
+.logo {
+  width: 70px;
+}
+nav ul li {
+  list-style-type: none;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+nav ul li:hover {
+  transform: scale(1.1);
+}
+
+nav ul li a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Syne Mono", monospace;
+}
+nav ul li a:hover {
+  color: rgb(212, 121, 1);
+}
+
+/* footer */
+footer {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+  height: 100px;
+}
+footer .sol {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+}
+footer .sol p {
+  padding-top: 5px;
+  padding-left: 15px;
+  color: rgba(255, 255, 255, 0.504);
+}
+footer .sag h5 {
+  font-size: 25px;
+  color: #fff;
+}
+footer .icons ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  font-size: 25px;
+}
+footer .icons ul .okkesgithub {
+  color: #fefcf3 !important;
+  transition: transform 0.2s;
+}
+footer .icons ul .okkesgithub:hover {
+  transform: scale(1.5);
+}
+
+/* Animasyonlu başlık */
+#container {
+  position: absolute;
+  margin: auto;
+  width: 100vw;
+  height: 80pt;
+  top: 0;
+  bottom: 0;
+
+  filter: url(#threshold) blur(0.6px);
+}
+
+#text1,
+#text2 {
+  position: absolute;
+  width: 100%;
+  display: inline-block;
+
+  font-family: "Raleway", sans-serif;
+  font-size: 80pt;
+
+  text-align: center;
+
+  user-select: none;
+}
+.anibaslik {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}

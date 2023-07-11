@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/metnicoz.css" />
+    <link rel="stylesheet" href="/css/anasayfa.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway:900&display=swap"
+    />
+    <title>KrippText</title>
+    <div class="main">
+      <nav>
+        <div class="baskisim">
+          <div class="anibaslik">
+            <div id="container">
+              <span id="text1"></span>
+              <span id="text2"></span>
+            </div>
+
+            <svg id="filters">
+              <defs>
+                <filter id="threshold">
+                  <feColorMatrix
+                    in="SourceGraphic"
+                    type="matrix"
+                    values="1 0 0 0 0
+                          0 1 0 0 0
+                          0 0 1 0 0
+                          0 0 0 255 -140"
+                  />
+                </filter>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </nav>
+      <div class="sifreliMesaj">
+        <h3>Şifreli Mesaj:</h3>
+        <input
+          class="smesaj"
+          type="text"
+          id="smesajj"
+          placeholder="Şifreli mesajı giriniz:"
+        />
+      </div>
+      <div class="anahtarkelime">
+        <h3>Anahtar:</h3>
+        <input type="text" class="anahtarkelimee" id="anahtarkelime" />
+      </div>
+      <button type="button" class="donusturbtnn" id="decrypt-btn">
+        Şifreyi Çöz
+      </button>
+      <div class="normalMesaj">
+        <h3>Açık Mesaj:</h3>
+        <label class="nmesaj">
+          <textarea id="nmesajj" type="text"></textarea>
+        </label>
+      </div>
+    </div>
+    <!-- FOOTER -->
+    <footer>
+      <div class="sol">
+        <h2>GaripText</h2>
+
+        <p>Tüm Hakları Saklıdır ©</p>
+      </div>
+      <div class="sag">
+        <br />
+        <div class="icons">
+          <ul>
+            <a href="" class="okkesgithub"
+              ><i class="fa-brands fa-github"></i>
+            </a>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </head>
+  <body>
+    <script>
+      const elts = {
+        text1: document.getElementById("text1"),
+        text2: document.getElementById("text2"),
+      };
+
+      const texts = ["103097114105112", "116101120116", "gar!ptext"];
+
+      const morphTime = 1;
+      const cooldownTime = 0.25;
+
+      let textIndex = texts.length - 1;
+      let time = new Date();
+      let morph = 0;
+      let cooldown = cooldownTime;
+
+      elts.text1.textContent = texts[textIndex % texts.length];
+      elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+
+      function doMorph() {
+        morph -= cooldown;
+        cooldown = 0;
+
+        let fraction = morph / morphTime;
+
+        if (fraction > 1) {
+          cooldown = cooldownTime;
+          fraction = 1;
+        }
+
+        setMorph(fraction);
+      }
+
+      function setMorph(fraction) {
+        elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+        elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+        fraction = 1 - fraction;
+        elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+        elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
+
+        elts.text1.textContent = texts[textIndex % texts.length];
+        elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+      }
+
+      function doCooldown() {
+        morph = 0;
+
+        elts.text2.style.filter = "";
+        elts.text2.style.opacity = "100%";
+
+        elts.text1.style.filter = "";
+        elts.text1.style.opacity = "0%";
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        let newTime = new Date();
+        let shouldIncrementIndex = cooldown > 0;
+        let dt = (newTime - time) / 5000;
+        time = newTime;
+
+        cooldown -= dt;
+
+        if (cooldown <= 0) {
+          if (shouldIncrementIndex) {
+            textIndex++;
+          }
+
+          doMorph();
+        } else {
+          doCooldown();
+        }
+      }
+
+      animate();
+    </script>
+    <script>
+      let decbtn = document.getElementById("decrypt-btn");
+      let sifrelimesajj = document.getElementById("smesajj");
+      let cozulmusmesaj = document.getElementById("nmesajj");
+      let anahtarkelime = document.getElementById("anahtarkelime");
+      //Decryption
+      function Decryption() {
+        let sifrelimesajj = document.getElementById("smesajj").value;
+        let anahtarkelime = document.getElementById("anahtarkelime").value;
+        const cozulmusdizi = sifrelimesajj.split("");
+
+        var dizii = [];
+        for (var i = 0; i < cozulmusdizi.length; i++) {
+          dizii[i] = cozulmusdizi[i];
+        }
+        if (anahtarkelime.length > 9 && anahtarkelime.length <= 11) {
+          var x = 0;
+          for (var i = 0; i < dizii.length; i++) {
+            dizii.splice(x, 2);
+            x = x + 4;
+          }
+        } else {
+          var x = 0;
+          for (var i = 0; i < dizii.length; i++) {
+            dizii.splice(x, 2);
+            x = x + 3;
+          }
+        }
+
+        var harfler = [
+          "A",
+          "B",
+          "C",
+          "Ç",
+          "D",
+          "E",
+          "F",
+          "G",
+          "Ğ",
+          "H",
+          "I",
+          "İ",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "Ö",
+          "P",
+          "R",
+          "S",
+          "Ş",
+          "T",
+          "U",
+          "Ü",
+          "V",
+          "Y",
+          "Z",
+          " ",
+          ".",
+        ];
+        var karsiligi = [
+          "191",
+          "192",
+          "193",
+          "189",
+          "187",
+          "185",
+          "195",
+          "197",
+          "199",
+          "183",
+          "181",
+          "179",
+          "201",
+          "203",
+          "205",
+          "177",
+          "175",
+          "173",
+          "207",
+          "209",
+          "211",
+          "171",
+          "169",
+          "167",
+          "213",
+          "215",
+          "217",
+          "165",
+          "163",
+          "123",
+          "100",
+        ];
+        var karsiligi2 = [
+          "100",
+          "195",
+          "192",
+          "911",
+          "187",
+          "185",
+          "191",
+          "197",
+          "199",
+          "183",
+          "181",
+          "179",
+          "201",
+          "203",
+          "205",
+          "177",
+          "175",
+          "173",
+          "207",
+          "209",
+          "211",
+          "171",
+          "169",
+          "167",
+          "213",
+          "215",
+          "217",
+          "165",
+          "163",
+          "135",
+          "100",
+        ];
+        var karsiligi3 = [
+          "857",
+          "859",
+          "855",
+          "789",
+          "787",
+          "785",
+          "925",
+          "927",
+          "923",
+          "183",
+          "185",
+          "189",
+          "278",
+          "280",
+          "281",
+          "345",
+          "347",
+          "343",
+          "265",
+          "267",
+          "263",
+          "477",
+          "479",
+          "475",
+          "663",
+          "661",
+          "665",
+          "168",
+          "169",
+          "333",
+          "100",
+        ];
+        var karsiligi4 = [
+          "653",
+          "356",
+          "197",
+          "208",
+          "188",
+          "178",
+          "811",
+          "333",
+          "111",
+          "589",
+          "778",
+          "785",
+          "899",
+          "895",
+          "991",
+          "990",
+          "999",
+          "105",
+          "103",
+          "101",
+          "211",
+          "213",
+          "454",
+          "234",
+          "988",
+          "568",
+          "312",
+          "665",
+          "100",
+          "888",
+          "100",
+        ];
+
+        var y = 0;
+        var harf = [];
+        var donusmusharf = [];
+
+        if (anahtarkelime.length > 3 && anahtarkelime.length <= 5) {
+          for (var i = 0; i < dizii.length; i++) {
+            for (var z = 0; z < karsiligi.length; z++) {
+              harf[i] = dizii[y] + dizii[y + 1] + dizii[y + 2];
+
+              if (harf[i] == karsiligi[z]) {
+                donusmusharf[i] = harfler[z];
+              }
+            }
+            y = y + 3;
+          }
+        } else if (anahtarkelime.length > 0 && anahtarkelime.length <= 3) {
+          for (var i = 0; i < dizii.length; i++) {
+            for (var z = 0; z < karsiligi4.length; z++) {
+              harf[i] = dizii[y] + dizii[y + 1] + dizii[y + 2];
+
+              if (harf[i] == karsiligi4[z]) {
+                donusmusharf[i] = harfler[z];
+              }
+            }
+            y = y + 3;
+          }
+        } else if (anahtarkelime.length > 5 && anahtarkelime.length <= 7) {
+          for (var i = 0; i < dizii.length; i++) {
+            for (var z = 0; z < karsiligi2.length; z++) {
+              harf[i] = dizii[y] + dizii[y + 1] + dizii[y + 2];
+
+              if (harf[i] == karsiligi2[z]) {
+                donusmusharf[i] = harfler[z];
+              }
+            }
+            y = y + 3;
+          }
+        } else {
+          for (var i = 0; i < dizii.length; i++) {
+            for (var z = 0; z < karsiligi3.length; z++) {
+              harf[i] = dizii[y] + dizii[y + 1] + dizii[y + 2];
+
+              if (harf[i] == karsiligi3[z]) {
+                donusmusharf[i] = harfler[z];
+              }
+            }
+            y = y + 3;
+          }
+        }
+
+        var donusmusmetin = "";
+        for (var i = 0; i < donusmusharf.length; i++) {
+          donusmusmetin = donusmusmetin + donusmusharf[i];
+        }
+        cozulmusmesaj.value = donusmusmetin;
+      }
+      decbtn.addEventListener("click", Decryption);
+    </script>
+  </body>
+</html>
